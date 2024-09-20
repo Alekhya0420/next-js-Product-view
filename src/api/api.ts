@@ -1,0 +1,1 @@
+export let base_url:string="http://localhost:4500/registration"

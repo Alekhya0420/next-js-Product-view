@@ -1,0 +1,18 @@
+{
+  "registration": [
+    {
+      "id": "b01",
+      "name": "pen",
+      "email": "50",
+      "city": "Good",
+      "password": "snake123#"
+    },
+    {
+      "id": "9040",
+      "name": "Raja Roy",
+      "email": "raja@gmail.com",
+      "city": "kolkata",
+      "password": "raj123456#"
+    }
+  ]
+}
