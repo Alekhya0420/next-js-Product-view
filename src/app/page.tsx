@@ -1,10 +1,11 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import About from '../component/about/About'
 
 export default function Home() {
   return (
-    <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}>
-    <h1>welcome to next js!</h1>
+    <div>
+    <About/>
     </div>
   );
 }

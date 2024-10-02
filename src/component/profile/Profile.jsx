@@ -1,58 +1,78 @@
-"use client"
-import React from 'react'
-import details from '../../database/db.json'
-import {useAppDispatch} from '@/redux/store/hooks';
-import {DeleteInfo} from '@/redux/slice/AuthSlice';
-import {useRouter} from 'next/navigation';
+"use client";
+import React from 'react';
+import details from '../../database/db.json';
+import { useAppDispatch } from '@/redux/store/hooks';
+import { DeleteInfo } from '@/redux/slice/AuthSlice';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Box, Typography, Button, Paper } from '@mui/material';
 
 function Profile() {
+    const dispatch = useAppDispatch();
+    const data = sessionStorage.getItem("authToken");
+    const myroute = useRouter();
 
-    let dispatch=useAppDispatch();
-    let data = sessionStorage.getItem("authToken");
-    console.log("mydata is",data);
-    let myroute=useRouter();
-
-    let user=details.registration.find((user)=>{
-        return user.id === data;
-    });
-    console.log("user is",user);
+    const user = details.registration.find((user) => user.id === data);
 
     if (!user) {
         return (
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-            <h1>No user found. Please log in again.</h1>
-          </div>
+            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+                <Typography variant="h4" color="error">No user found. Please log in again.</Typography>
+            </Box>
         );
     }
 
-    let handleDelete=()=>{
-      dispatch(DeleteInfo(user.id))
-      .then((res)=>{
-        console.log(res);
-        myroute.push('/detail');
-      })
+    const handleDelete = () => {
+        dispatch(DeleteInfo(user.id))
+            .then(() => {
+                alert("Congratulation,your account has successfully deleted!")
+                myroute.push('/detail');
+            })
+            .catch((error) => console.log("Error:", error));
+    };
 
-      .catch((error)=>console.log("error is",error));
-    }
-    
-  return (
-    <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",height:"100vh"}}>
-      My Profile Page details are given below:
-      <h1>Name:{user.name}</h1>
-      <h1>Email:{user.email}</h1>
-      <h1>City:{user.city}</h1>
-      <button onClick={handleDelete}>Delete</button>
-     
-      
+    return (
+        <Paper sx={{ padding: 3, borderRadius: 2, boxShadow: 2, backgroundColor:'#edf7fc'}}>
+            <Typography variant="h5" sx={{ marginBottom: 2, fontWeight: 'bold', textAlign: 'center' }}>
+                My Profile
+            </Typography>
+            <br></br>
+            <Box sx={{ marginBottom: 2 }}>
+          <Typography variant="h6">
+            <span style={{ fontWeight: 'normal',color:'red'
+             }}>Name:</span> {user.name}
+          </Typography>
 
-      <button>
-        <Link href="/reset">Reset</Link>
-      </button>
+          <Typography variant="h6">
+              <span style={{ fontWeight: 'normal',color:'red' }}>Email:</span> {user.email}
+          </Typography>          
 
 
-    </div>
-  )
+          <Typography variant="h6">
+          <span style={{ fontWeight: 'normal',color:'red'}}>City</span>{user.city}
+          </Typography>
+
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
+                <Button 
+                    variant="contained" 
+                    color="error" 
+                    onClick={handleDelete} 
+                    sx={{ flex: 1, marginRight: 1 }}
+                >
+                    Delete
+                </Button>
+                <Button 
+                    variant='contained'
+                    component={Link} 
+                    href="/reset" 
+                    sx={{ flex: 1, marginLeft: 1 }}
+                >
+                    Reset
+                </Button>
+            </Box>
+        </Paper>
+    );
 }
 
-export default Profile
+export default Profile;

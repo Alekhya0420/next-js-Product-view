@@ -5,8 +5,10 @@ import details from '../../database/db.json'
 import {useForm} from 'react-hook-form'
 import { LogInfo } from '@/redux/slice/AuthSlice'
 import {useAppDispatch} from '@/redux/store/hooks'
+import { useRouter } from 'next/navigation'
 
 function Login() {
+    let myRoute=useRouter();
     let form=useForm();
     let{register,handleSubmit,formState}=form;
     let{errors}=formState;
@@ -23,11 +25,12 @@ function Login() {
             return;
         }
 
-        dispatch(LogInfo(userData))
+         dispatch(LogInfo(userData))
         .then((res)=>{
             alert("successful");
             console.log("RESULT IS",res);
             window.sessionStorage.setItem("authToken",res.meta.arg.id);
+            myRoute.push('/category');
         })
 
         .catch((error)=>console.log("error is",error));

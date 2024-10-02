@@ -28,7 +28,7 @@ export let DeleteInfo = createAsyncThunk("info/Delete", async (data: any) => {
   return res?.data;
 });
 
-export let UpdateInfo = createAsyncThunk("info/UpdateInfo", async (data: any) => {
+export let UpdateInfo = createAsyncThunk("info/UpdateInfo",async(data:any) => {
   const res = await axiosInstance.patch(`${base_url}/${data.id}`,
     {
       id:data.id,

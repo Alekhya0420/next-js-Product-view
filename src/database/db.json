@@ -8,11 +8,32 @@
       "password": "snake123#"
     },
     {
-      "id": "9040",
-      "name": "Raja Roy",
-      "email": "raja@gmail.com",
+      "id": "ef4e",
+      "name": "Nandini",
+      "email": "nandini@gmail.com",
       "city": "kolkata",
-      "password": "raj123456#"
+      "password": "nandi123#"
+    },
+    {
+      "id": "f976",
+      "name": "Rima Roy",
+      "email": "rima@gmail.com",
+      "city": "kolkata",
+      "password": "rima123#"
+    },
+    {
+      "id": "445f",
+      "name": "Rajatava Dutta",
+      "email": "rajatava@gmail.com",
+      "city": "Chennai",
+      "password": "rajatava1233"
+    },
+    {
+      "id": "93d4",
+      "name": "Bopanna Khan",
+      "email": "bopanna@gmail.com",
+      "city": "kerala",
+      "password": "bopanna123#"
     }
   ]
 }

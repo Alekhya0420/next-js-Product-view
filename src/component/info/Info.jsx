@@ -4,12 +4,15 @@ import { useForm} from 'react-hook-form'
 import {useAppDispatch} from '@/redux/store/hooks'
 import {RegInfo} from '@/redux/slice/AuthSlice'
 import  details from '../../database/db.json'
+import Link from 'next/link'
+import {useRouter} from 'next/navigation'
 
 const Info = () => {
   let form =useForm();
   let {register,formState,handleSubmit} = form;
   let {errors}=formState;
   let dispatch=useAppDispatch();
+  let myRoute=useRouter();
 
 
   const submitHandle = (data) => {
@@ -20,6 +23,7 @@ const Info = () => {
     if(existingData)
     {
       alert("user already exist");
+      return;
     }
 
     let userData=
@@ -33,6 +37,7 @@ const Info = () => {
     .then((res)=>{
       console.log("output is",res.data);
       alert("congratulation");
+      myRoute.push('/login');
     })
 
     .catch((errors)=>console.log("Errors are",errors));
@@ -136,9 +141,25 @@ const Info = () => {
           width:"95%",
           padding:"8px",
           border:"none",
-          borderRadius:"4px"
+          borderRadius:"4px",
+          marginBottom:"15px"
         }}
         >Submit</button>
+
+      <button type="submit"
+        style={{
+          backgroundColor:"red",
+          color:"white",
+          width:"95%",
+          padding:"8px",
+          border:"none",
+          borderRadius:"4px"
+        }}
+        >
+        <Link href="/login" style={{color: "white", textDecoration:"none"}}>
+        Already have Account?</Link></button>
+        
+
       </form>
       </fieldset>
       
